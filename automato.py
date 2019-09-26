@@ -94,40 +94,33 @@ class Automato:
         while minimizacao is False:
             minimizacao = True
             for coluna, linhas in matrizMinimizacao.items():
-                for linha, valor in linhas.items():      
+                for linha, valor in linhas.items():
+                    column = self.recuperarEstadoPorNome(coluna)
+                    line = self.recuperarEstadoPorNome(linha)
+                    print(column, line)
                     if valor == None:
                         listaTestes = []
-                        testeColuna = self.recuperarEstadoPorNome(coluna)
-                        testeLinha = self.recuperarEstadoPorNome(linha)
                         marcou = False
                         for x in self.__alfabeto:
-                            testeColuna =  self.recuperarEstadoPorNome(testeColuna.mover(x))
-                            testeLinha = self.recuperarEstadoPorNome(testeLinha.mover(x))
-                            listaTestes.append((testeColuna, testeLinha))
-                            if (testeColuna.ehEstadoFinal != testeLinha.ehEstadoFinal):
+                            testeColumn =  self.recuperarEstadoPorNome(column.mover(x))
+                            testeLine = self.recuperarEstadoPorNome(line.mover(x))
+                            print(f"f({column}, {x}) = {testeColumn}")
+                            print(f"f({line}, {x}) = {testeLine}")
+                            listaTestes.append((testeColumn, testeLine))
+                            if (testeColumn.ehEstadoFinal != testeLine.ehEstadoFinal):
                                 linhas[linha] = "X"
                                 marcou = True
                                 break
-                            elif (testeColuna.ehEstadoFinal == True and testeLinha.ehEstadoFinal == True):
+                            elif (testeColumn.ehEstadoFinal == True and testeLine.ehEstadoFinal == True):
                                 linhas[linha] = "Eq"
                                 marcou = True
                                 break
+                        print()
                         if not marcou:
                             linhas[linha] = listaTestes
-                    elif type(valor) == list:
-                        minimizacao = False
-                        for pos, letra in enumerate(self.__alfabeto):
-                            item = valor[pos]
-                            testeColuna = self.recuperarEstadoPorNome(item[0].mover(letra))
-                            testeLinha = self.recuperarEstadoPorNome(item[1].mover(letra))
-                            if (testeColuna.ehEstadoFinal != testeLinha.ehEstadoFinal):
-                                linhas[linha] = "X"
-                                marcou = True
-                                break
-                            elif (testeColuna.ehEstadoFinal == True and testeLinha.ehEstadoFinal == True):
-                                linhas[linha] = "Eq"
-                                marcou = True
-                                break
+                    elif isinstance(valor, list):
+                        print("lista")
+            minimizacao = True
         self.printarMatriz(matrizMinimizacao)
 
 
