@@ -39,6 +39,8 @@ Vamos aos metodos:
     4. testarAutomato() :
         Nesse metodo é feito o teste para verificar se a palavra pertence ao conjunto de palavras do automato
     5. criarMatrizTriangular() : A partir os estados do automato o metodo gera uma matriz triangular onde as linhas possuem os vertices começando do segundo ate o ultimo e as colunas do primeiro ate o penultimo
+    6. minimizacao() : Minimiza o automato e retorna a matriz de minimização a qual mostra quais os estados equivalentes 
+    7. printarMatriz() : Printa a matriz de minimização em forma de uma matriz triangular. 
 
 2. Classe Estado
    

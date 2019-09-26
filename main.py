@@ -9,10 +9,23 @@ def main ():
     estadoInicial = data["estadoInicial"]
     estadoFinal = data["estadoFinal"]
     automato = Automato(alfabeto, listaTransicoes, estadoInicial, estadoFinal)
-
     automato.createAutomato()
-    automato.testarAutomato("abbaaba")
-    automato.criarMatrizTriangular()
+
+    while True:
+        print("1. - Testar Palavra")
+        print("2. - Minimizar Automato")
+        print("3. - Finalizar")
+        opc = int(input("opcao: "))
+        if opc == 1:
+            palavra = input("Informe a palavra: ")
+            automato.testarAutomato(palavra)
+        elif opc == 2:
+            automato.minimizacao()
+        elif opc == 3:
+            break
+        else:
+            print("Opção invalida")
+
 
 
 

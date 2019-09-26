@@ -59,16 +59,76 @@ class Automato:
     def criarMatrizTriangular(self):
         colunas = self.__estados.copy()[:-1]
         linhas = self.estados.copy()[1:]
-        matriz = []
+        matriz = {}
         for x in colunas:
             linha = {}
             for y in linhas:
                 linha.update({y.nome:None})
-            matriz.append({x.nome:linha})
+            matriz.update({x.nome:linha})
             linhas = linhas[1:]
-        for x in matriz:
-            print(x)
         return matriz    
+    #printa a matriz de minimização em forma de uma matriz triangular 
+    def printarMatriz(self, matriz):
+        colunas = self.__estados.copy()[:-1]
+        linhas = self.estados.copy()[1:]
+        impressao = []
+        for j in linhas:
+            linha = []
+            for x in matriz.values():
+                for key, value in x.items():
+                    if j.nome == key:
+                        linha.append(value)
+            impressao.append(linha)
+        print()
+        for pos , item in enumerate(impressao):
+            valores = "  ".join(item)
+            print("{:^2}  {}".format(linhas[pos].nome, valores))
+        colunas = " ".join(map(lambda x: x.nome, colunas))
+        string = " "*3
+        print("{:^3}{}".format(string, colunas))
+    
+    # minimiza o automato e retorna a matriz de minimização a qual mostra quais os estados equivalentes 
+    def minimizacao(self):
+        minimizacao = False
+        matrizMinimizacao = self.criarMatrizTriangular()
+        while minimizacao is False:
+            minimizacao = True
+            for coluna, linhas in matrizMinimizacao.items():
+                for linha, valor in linhas.items():      
+                    if valor == None:
+                        listaTestes = []
+                        testeColuna = self.recuperarEstadoPorNome(coluna)
+                        testeLinha = self.recuperarEstadoPorNome(linha)
+                        marcou = False
+                        for x in self.__alfabeto:
+                            testeColuna =  self.recuperarEstadoPorNome(testeColuna.mover(x))
+                            testeLinha = self.recuperarEstadoPorNome(testeLinha.mover(x))
+                            listaTestes.append((testeColuna, testeLinha))
+                            if (testeColuna.ehEstadoFinal != testeLinha.ehEstadoFinal):
+                                linhas[linha] = "X"
+                                marcou = True
+                                break
+                            elif (testeColuna.ehEstadoFinal == True and testeLinha.ehEstadoFinal == True):
+                                linhas[linha] = "Eq"
+                                marcou = True
+                                break
+                        if not marcou:
+                            linhas[linha] = listaTestes
+                    elif type(valor) == list:
+                        minimizacao = False
+                        for pos, letra in enumerate(self.__alfabeto):
+                            item = valor[pos]
+                            testeColuna = self.recuperarEstadoPorNome(item[0].mover(letra))
+                            testeLinha = self.recuperarEstadoPorNome(item[1].mover(letra))
+                            if (testeColuna.ehEstadoFinal != testeLinha.ehEstadoFinal):
+                                linhas[linha] = "X"
+                                marcou = True
+                                break
+                            elif (testeColuna.ehEstadoFinal == True and testeLinha.ehEstadoFinal == True):
+                                linhas[linha] = "Eq"
+                                marcou = True
+                                break
+        self.printarMatriz(matrizMinimizacao)
 
 
     #retorna a representaçaõ do automato
