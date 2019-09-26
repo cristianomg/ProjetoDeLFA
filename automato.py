@@ -1,5 +1,4 @@
 from estado import Estado
-from estadoMinimizacao import EstadoMinimizacao
 class Automato:
     def __init__(self, alfabeto, listaTransicoes, inicio, fim):
         self.__estados = []
@@ -11,10 +10,17 @@ class Automato:
     @property
     def estados(self):
         return self.__estados
+    
+    def verificaSeEstadoFinal(self, estado):
+        if estado in self.__fim:
+            return True
+        else:
+            return False
+
     #cria todos os estados e seta as transições neles
     def createAutomato(self):
         for estado, funcaoTransicao in self.__listaTransicoes.items():
-            newEstado = Estado(estado, self.__alfabeto, funcaoTransicao)
+            newEstado = Estado(estado, self.__alfabeto, funcaoTransicao, self.verificaSeEstadoFinal(estado))
             self.__estados.append(newEstado)
 
     #recupera o objeto estado a partir do nome 
@@ -42,13 +48,14 @@ class Automato:
                 estados.append(inicio.nome)
             estados = "; ".join(estados)
             print("Estados utilizados pela palavra: " + estados)
-            if inicio.nome in self.__fim:
+            if inicio.ehEstadoFinal:
                 print("Palavra aprovada")
             else:
                 print("Palavra recusada")
         else:
             print("A Palavra não pertence ao alfabeto do automato.")
 
+    #cria uma matriz triangular com os estados do automato
     def criarMatrizTriangular(self):
         colunas = self.__estados.copy()[:-1]
         linhas = self.estados.copy()[1:]
@@ -62,8 +69,6 @@ class Automato:
         for x in matriz:
             print(x)
         return matriz    
-
-        #   for x in enumerate(self.__estados):
 
 
     #retorna a representaçaõ do automato

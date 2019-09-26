@@ -11,7 +11,7 @@ def main ():
     automato = Automato(alfabeto, listaTransicoes, estadoInicial, estadoFinal)
 
     automato.createAutomato()
-    automato.testarAutomato("abbaababbbbbb")
+    automato.testarAutomato("abbaaba")
     automato.criarMatrizTriangular()
 
 
