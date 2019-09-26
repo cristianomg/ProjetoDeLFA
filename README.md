@@ -10,7 +10,7 @@ Verificar os estados equivalentes a partir do metodo de minimização.
 
 O cadastro do automato foi feito por meio de um json representado pelo seguinte:
 
-´´´json
+```json
 
 {
     "alfabeto":["a","b"],
@@ -20,8 +20,8 @@ O cadastro do automato foi feito por meio de um json representado pelo seguinte:
     
 
 }
+```
 
-´´´
 ## Metodos
 A classe principal do projeto é a denominada automato, nela constam todos os metodos de criação, teste, e minimização do automato
 
