@@ -12,7 +12,7 @@ def main ():
 
     automato.createAutomato()
     automato.testarAutomato("abbaababbbbbb")
-
+    automato.criarMatrizTriangular()
 
 
 

@@ -1,5 +1,5 @@
 from estado import Estado
-
+from estadoMinimizacao import EstadoMinimizacao
 class Automato:
     def __init__(self, alfabeto, listaTransicoes, inicio, fim):
         self.__estados = []
@@ -48,6 +48,23 @@ class Automato:
                 print("Palavra recusada")
         else:
             print("A Palavra não pertence ao alfabeto do automato.")
+
+    def criarMatrizTriangular(self):
+        colunas = self.__estados.copy()[:-1]
+        linhas = self.estados.copy()[1:]
+        matriz = []
+        for x in colunas:
+            linha = {}
+            for y in linhas:
+                linha.update({y.nome:None})
+            matriz.append({x.nome:linha})
+            linhas = linhas[1:]
+        for x in matriz:
+            print(x)
+        return matriz    
+
+        #   for x in enumerate(self.__estados):
+
 
     #retorna a representaçaõ do automato
     def __str__(self):

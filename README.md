@@ -38,6 +38,7 @@ Vamos aos metodos:
         Nesse metodo é feito um teste para verificar se todas as letras da palavra a ser testada estão presentes no alfabeto do automato;
     4. testarAutomato() :
         Nesse metodo é feito o teste para verificar se a palavra pertence ao conjunto de palavras do automato
+    5. criarMatrizTriangular() : A partir os estados do automato o metodo gera uma matriz triangular onde as linhas possuem os vertices começando do segundo ate o ultimo e as colunas do primeiro ate o penultimo
 
 2. Classe Estado
    
