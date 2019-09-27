@@ -14,7 +14,12 @@ O cadastro do automato foi feito por meio de um json representado pelo seguinte:
 
 {
     "alfabeto":["0","1"],
-    "listaTransicoes":{"q0": {"0":"q1", "1": "q2"}, "q1": {"0":"q3", "1":"q4"}, "q2": {"0":"q3","1":"q4"}, "q3": {"0": "q1", "1": "q4"}, "q4": {"0": "q4", "1": "q4"} },
+    "listaTransicoes":{"q0": {"0": "q1", "1": "q2"},
+                       "q1": {"0": "q3", "1": "q4"},
+                       "q2": {"0": "q3", "1": "q4"},
+                       "q3": {"0": "q1", "1": "q4"},
+                       "q4": {"0": "q4", "1": "q4"} },
+                       
     "estadoInicial":"q0",
     "estadoFinal":["q4"]
     
