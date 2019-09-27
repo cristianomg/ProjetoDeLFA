@@ -13,14 +13,17 @@ O cadastro do automato foi feito por meio de um json representado pelo seguinte:
 ```json
 
 {
-    "alfabeto":["a","b"],
-    "listaTransicoes":{"q1": {"a":"q2", "b": "q3"}, "q2": {"a":"q1", "b":"q2"}, "q3": {"a":"q3","b":"q3"} },
-    "estadoInicial":"q1",
-    "estadoFinal":"q3"
+    "alfabeto":["0","1"],
+    "listaTransicoes":{"q0": {"0":"q1", "1": "q2"}, "q1": {"0":"q3", "1":"q4"}, "q2": {"0":"q3","1":"q4"}, "q3": {"0": "q1", "1": "q4"}, "q4": {"0": "q4", "1": "q4"} },
+    "estadoInicial":"q0",
+    "estadoFinal":["q4"]
     
 
 }
 ```
+Para configurar o automato, edite o arquivo automato.json
+
+Para rodar o programa execute o arquvio main.py
 
 ## Metodos
 A classe principal do projeto é a denominada automato, nela constam todos os metodos de criação, teste, e minimização do automato
@@ -41,6 +44,8 @@ Vamos aos metodos:
     5. criarMatrizTriangular() : A partir os estados do automato o metodo gera uma matriz triangular onde as linhas possuem os vertices começando do segundo ate o ultimo e as colunas do primeiro ate o penultimo
     6. minimizacao() : Minimiza o automato e retorna a matriz de minimização a qual mostra quais os estados equivalentes 
     7. printarMatriz() : Printa a matriz de minimização em forma de uma matriz triangular. 
+    8. MarcaEstadosNaoFinais : Marca na matriz os estados distinguintes dos estados finais a partir da palavra vazia
+    9. Verifica se todos estados foram marcados com X ou com Eq e retorna True caso marcados
 
 2. Classe Estado
    
